@@ -38,6 +38,8 @@ private:
 	bool mDebugMode;
 	void print(int, int, const std::vector<double>&) const;
 	
+	//FileManager
+	bool use_file;
 };
 
 #endif // SIMULATION_H
