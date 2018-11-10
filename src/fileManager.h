@@ -1,5 +1,5 @@
-#ifndef SIMULATION_H
-#define SIMULATION_H
+#ifndef FILEMANAGER_H
+#define FILEMANAGER_H
 
 #include <vector>
 #include <iostream>
@@ -12,9 +12,9 @@
 
 class FileManager {
 	public :
-		FileManager(string);
+		FileManager(std::string);
 		~FileManager();
-		void print_on_buffer(vector<double>, int num_gen); //J'ai pensé que passer aussi le numero de la generation rendrait le fichier plus lisible, à voir si c'est vraiment utile au final
+		void print_on_buffer(std::vector<double>, int num_gen); //J'ai pensé que passer aussi le numero de la generation rendrait le fichier plus lisible, à voir si c'est vraiment utile au final
 		
 	
 	
@@ -23,7 +23,7 @@ class FileManager {
 	
 	
 	private : 
-		string file_name;
+		std::string file_name;
 };
 
 #endif

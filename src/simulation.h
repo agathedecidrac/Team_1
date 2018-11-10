@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include <string>
 
 const int SIMULATION_DEFAULT_POP_SIZE(100);
 const int SIMULATION_DEFAULT_DURATION(10);
@@ -31,7 +32,7 @@ private:
 	
 	// methods
 	void step();
-	void initialize(int nb_repeats, int duration, int pop_size, std::vector<double> frequences);
+	void initialize(int nb_repeats, int duration, int pop_size, std::vector<double> frequences, std::string);
 	std::vector<double> getFrequences() const;
 	
 	// debug

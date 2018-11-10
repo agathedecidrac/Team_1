@@ -1,12 +1,15 @@
 #include "fileManager.h"
 
 
-FileManager::FileManager(string name) 
+FileManager::FileManager(std::string name) 
 	: file_name(name) 
 {}
 
-void FileManager::print_on_buffer(vector<double>, int num_gen) {
-	ifstream gen_file (file_name, ios::in); //attention à la position du fichier ?
+FileManager::~FileManager()
+{}
+
+void FileManager::print_on_buffer(std::vector<double>, int num_gen) {
+	std::ifstream gen_file (file_name); //attention à la position du fichier ?
 	
 	if (gen_file) {
 		//Écrire dans le fichier

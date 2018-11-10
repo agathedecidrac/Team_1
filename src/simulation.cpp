@@ -4,26 +4,29 @@
 #include <stdexcept>
 #include <math.h>
 
+
 Simulation::Simulation(int argc, char** argv) {
 	TCLAP::CmdLine cmd("Population genetics simulation");
 	TCLAP::ValueArg< int > pop_size("N", "size", "Number of individuals in the population", false, SIMULATION_DEFAULT_POP_SIZE, "int");
 	cmd.add(pop_size);
 	TCLAP::ValueArg<int> duration("d", "duration", "Number of generations created", false, SIMULATION_DEFAULT_DURATION, "int");
 	cmd.add(duration);
-	TCLAP::ValueArg<int> nb_alleles("a", "number_alleles", "Number of alleles in the population", false, SIMULATION_DEFAULT_NB_ALLELES, "int");
-	cmd.add(nb_alleles);
+	
+	/*TCLAP::ValueArg<int> nb_alleles("a", "number_alleles", "Number of alleles in the population", false, SIMULATION_DEFAULT_NB_ALLELES, "int");
+	cmd.add(nb_alleles);*/
+	
 	TCLAP::UnlabeledMultiArg<double> frequences("f", "frequences", "Frequence of each allele in the population", false, "double");
 	cmd.add(frequences);
 	TCLAP::ValueArg<int> nb_repetitions("R", "repeats", "Number of times we repeat the simulation", false, SIMULATION_DEFAULT_REPEATS, "int");
 	cmd.add(nb_repetitions);
 	TCLAP::SwitchArg arg_debug("D", "debug", "Activate debug mode (verbose mode)");
 	cmd.add(arg_debug);
-	TCLAP::ValueArg<string> buffer_name ("n", "file_name", "Name of file we print the generations on", false, "string");
+	TCLAP::ValueArg<std::string> buffer_name ("n", "file_name", "Name of file we print the generations on", false, "jv",  "string");
     cmd.add(buffer_name);
    
     cmd.parse(argc, argv);
     this->initialize(nb_repetitions.getValue(), duration.getValue(), 
-					 pop_size.getValue(), frequences.getValue());
+					 pop_size.getValue(), frequences.getValue(), buffer_name.getValue());
     this->setDebugMode(arg_debug.getValue());
 }
 
@@ -62,7 +65,7 @@ void Simulation::run() {
 
 // But : vérifier les arguments et initialiser les attributs
 // Q: que faire si les occurences des allèles (freq * pop_size) ne sont pas des chiffres rond ?
-void Simulation::initialize(int nb_repeats, int duration, int pop_size, std::vector<double> frequences, string buffer_name) {
+void Simulation::initialize(int nb_repeats, int duration, int pop_size, std::vector<double> frequences, std::string buffer_name) {
 	if(nb_repeats < 1) throw std::invalid_argument("Invalid number of repeats");
 	if(pop_size < 1) throw std::invalid_argument("Invalid population size"); 
 	if(duration < 1) throw std::invalid_argument("Duration should be at least 1");
@@ -88,7 +91,7 @@ void Simulation::initialize(int nb_repeats, int duration, int pop_size, std::vec
 	//FileManager
 	if (buffer_name != "") {
 		use_file =true;
-		FileManager(buffer_name);
+		FileManager f (buffer_name);
 	}
 
 }
